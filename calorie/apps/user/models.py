@@ -1,5 +1,11 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from datetime import date
+
+
+def get_age(birthdate):
+    today = date.today()
+    return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
 
 
 class UserManager(BaseUserManager):
@@ -11,6 +17,15 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, username=email, **extra_fields)
         user.set_password(password)
+
+        weight = extra_fields['weight']
+        height = extra_fields['height']
+        age = get_age(extra_fields['birthday'])
+
+        if extra_fields['sex'] == 'M':
+            user.max_calories = (13.75 * weight) + (5 * height) - (6.76 * age) + 66.5
+        elif extra_fields['sex'] == 'F':
+            user.max_calories = (9.56 * weight) + (1.85 * height) - (4.68 * age) + 665
         user.save(using=self.db)
         return user
 
@@ -35,12 +50,18 @@ class User(AbstractUser):
     email = models.EmailField('E-mail', unique=True)
     is_staff = models.BooleanField('Equipe', default=False)
     name = models.CharField('Nome', max_length=150)
-    height = models.DecimalField('Altura', max_digits=3, decimal_places=2)
+    height = models.PositiveIntegerField('Altura em cm')
     weight = models.IntegerField('Peso')
     birthday = models.DateField()
+    max_calories = models.PositiveIntegerField('Meta de calorias', default=0)
+    current_calories = models.PositiveIntegerField('Calorias atuais', default=0)
+    sex = models.CharField(max_length=2, choices=[
+        ('M', 'MASCULINO'),
+        ('F', 'FEMININO'),
+    ])
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'height', 'weight', 'birthday']
+    REQUIRED_FIELDS = ['name', 'height', 'weight', 'birthday', 'sex']
 
     def __str__(self):
         return self.email

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Refeições
+{% endblock %}
+
+{% block content %}
+    <main class="container-fluid">
+        <div class="text-center"> {% if not meals %}
+            <h3 class="pt-3">Você ainda não possui nenhuma refeição</h3>
+        {% else %}
+            <h3 class="pt-3">Refeições</h3>
+        {% endif %}
+            {% for meal in meals %}
+                <div class="card border-dark my-3 mx-auto text-start" style="width: 22rem;">
+                    <div class="card-header">
+                        {{ meal.name }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Horário da refeição: {{ meal.time }}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="#">
+                                <button class="btn btn-success">Adicionar alimento</button>
+                            </a>
+                            <a href="{% url 'meal:delete' meal.pk %}">
+                                <button class="btn btn-danger">Excluir</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div>
+                <a href="{% url 'meal:create' %}" class="btn btn-primary btn-block mb-3"
+                   style="width: 22rem;">
+                    Adicionar Refeição
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

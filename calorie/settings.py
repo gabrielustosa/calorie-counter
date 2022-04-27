@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 
     # my apps
-    'calorie.apps.calorie',
+    'calorie.apps.meal',
     'calorie.apps.user',
 ]
 
@@ -133,4 +133,4 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 AUTH_USER_MODEL = 'user.User'
-LOGIN_REDIRECT_URL = 'calorie:home'
+LOGIN_REDIRECT_URL = 'home'

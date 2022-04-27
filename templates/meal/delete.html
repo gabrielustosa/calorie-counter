@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    Excluir Post
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center pt-5">
+        <form method="post">
+            {% csrf_token %}
+            <h3>Você tem certeza que você quer excluir a refeição "{{ object.name }}"?</h3>
+            {% buttons %}
+                <button type="submit" class="btn btn-danger">Confirmar</button>
+                <button type="submit" class="btn btn-warning">
+                    <a href="{% url 'meal:manage' %}" class="text-decoration-none text-white">Cancelar</a>
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

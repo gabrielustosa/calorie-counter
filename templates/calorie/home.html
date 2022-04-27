@@ -5,5 +5,33 @@
 {% endblock %}
 
 {% block content %}
-
+    <main class="container-fluid pt-5">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Máximo de Calorias - {{ request.user.max_calories }}</h2>
+                        <h2>Calorias do Dia - {{ request.user.current_calories }}</h2>
+                        <a href="{% url 'meal:manage' %}" class="btn btn-primary btn-block mt-3" style="width: 22rem;">
+                            Adicionar Refeição
+                        </a>
+                    </div>
+                    <div class="col-12">
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="card" style="width: 30rem;">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

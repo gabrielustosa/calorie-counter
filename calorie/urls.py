@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from calorie.apps.meal.views import HomeCalorieView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('calorie.apps.calorie.urls')),
+    path('', HomeCalorieView.as_view(), name='home'),
+    path('meal/', include('calorie.apps.meal.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
