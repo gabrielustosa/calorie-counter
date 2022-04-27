@@ -12,11 +12,10 @@ class Meal(models.Model):
 
 
 class Food(models.Model):
-    name = models.CharField(max_length=100)
-    quantity = models.PositiveIntegerField()
-    measure = models.CharField(max_length=2, choices=[
+    name = models.CharField('Nome', max_length=100)
+    quantity = models.PositiveIntegerField('Quantidade')
+    measure = models.CharField('Medida', max_length=2, choices=[
         ('G', 'Gramas'),
-        ('MG', 'Mili Gramas'),
         ('L', 'Litros'),
         ('ML', 'Mili Litros'),
     ])
@@ -29,7 +28,7 @@ class Food(models.Model):
     calories = models.PositiveIntegerField()
     cholesterol = models.PositiveIntegerField()
     protein = models.DecimalField(max_digits=6, decimal_places=1)
-    carbohydrates_total = models.DecimalField(max_digits=6, decimal_places=1)
+    carbohydrates_total = models.DecimalField(max_digits=20, decimal_places=1)
     meal = models.ForeignKey(Meal, related_name='foods', on_delete=models.DO_NOTHING)
 
     def __str__(self):

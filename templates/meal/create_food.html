@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}
+    Adicionando Comida
+{% endblock %}
+
+{% block content %}
+    <main class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-4" style="width: 30rem;">
+                <h2 class="text-center">Adicionando Comida</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary btn-block mb-2" style="width: 28.6rem;">
+                            Adicionar
+                        </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

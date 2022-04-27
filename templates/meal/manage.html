@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <p class="card-text">Horário da refeição: {{ meal.time }}</p>
                         <div class="d-flex justify-content-between">
-                            <a href="#">
+                            <a href="{% url 'meal:create_food' meal.id %}">
                                 <button class="btn btn-success">Adicionar alimento</button>
                             </a>
                             <a href="{% url 'meal:delete' meal.pk %}">
