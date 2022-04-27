@@ -35,7 +35,7 @@ class User(AbstractUser):
     email = models.EmailField('E-mail', unique=True)
     is_staff = models.BooleanField('Equipe', default=False)
     name = models.CharField('Nome', max_length=150)
-    height = models.DecimalField('Altura', max_digits=1, decimal_places=2)
+    height = models.DecimalField('Altura', max_digits=3, decimal_places=2)
     weight = models.IntegerField('Peso')
     birthday = models.DateField()
 
