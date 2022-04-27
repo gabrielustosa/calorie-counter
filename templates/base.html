@@ -1,0 +1,18 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% bootstrap_css %}
+</head>
+<body>
+
+{% bootstrap_messages %}
+
+{% block content %} {% endblock %}
+
+{% bootstrap_javascript %}
+{% block javascript %} {% endblock %}
+</body>
+</html>
