@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from datetime import date
 
+from calorie.apps.meal import models as meal
+
 
 def get_age(birthdate):
     today = date.today()
@@ -67,3 +69,5 @@ class User(AbstractUser):
         return self.email
 
     objects = UserManager()
+
+

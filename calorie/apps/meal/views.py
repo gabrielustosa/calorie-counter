@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DeleteView
 
 from calorie.apps.meal.models import Meal, Food
+from calorie.apps.user.models import User
 
 translator = Translator()
 
@@ -21,6 +22,11 @@ class HomeCalorieView(TemplateView):
         if request.user.is_anonymous:
             return redirect('login')
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['meals'] = Meal.objects.filter(user=self.request.user)
+        return context
 
 
 class ManageMealView(TemplateView):
@@ -112,6 +118,9 @@ class CreateFoodView(CreateView):
             instance.carbohydrates_total = carbohydrates * measure
             instance.meal = meal
 
+            user = User.objects.get(pk=self.request.user.id)
+            user.current_calories = user.current_calories + instance.calories
+            user.save()
         else:
             messages.error(self.request, 'Ocorreu um erro ao tentar adicionar a comida.')
             return redirect('meal:manage')

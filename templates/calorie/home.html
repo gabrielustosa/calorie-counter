@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load field_filter %}
 
 {% block title %}
     Contador de calorias
@@ -16,21 +17,68 @@
                             Adicionar Refeição
                         </a>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 py-5">
+                        <h2>O que foi ingerido hoje:</h2>
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td>Açucar</td>
+                                <td class="text-end">{% get_field_meal request.user 'sugar' %} G </td>
+                            </tr>
+                            <tr>
+                                <td>Fibra</td>
+                                <td class="text-end">{% get_field_meal request.user 'fiber' %} G </td>
+                            </tr>
+                            <tr>
+                                <td>Sodio</td>
+                                <td class="text-end">{% get_field_meal request.user 'sodium' %} MG </td>
+                            </tr>
+                            <tr>
+                                <td>Potássio</td>
+                                <td class="text-end">{% get_field_meal request.user 'potassium' %} MG </td>
+                            </tr>
+                            <tr>
+                                <td>Gordura saturada</td>
+                                <td class="text-end">{% get_field_meal request.user 'fat_saturated' %} G </td>
+                            </tr>
+                            <tr>
+                                <td>Gorduras Totais</td>
+                                <td class="text-end">{% get_field_meal request.user 'fat_total' %} G </td>
+                            </tr>
+                            <tr>
+                                <td>Colesterol</td>
+                                <td class="text-end">{% get_field_meal request.user 'cholesterol' %} MG </td>
+                            </tr>
+                            <tr>
+                                <td>Proteinas</td>
+                                <td class="text-end">{% get_field_meal request.user 'protein' %} G </td>
+                            </tr>
+                            <tr>
+                                <td>Carboidratos</td>
+                                <td class="text-end">{% get_field_meal request.user 'carbohydrates_total' %} G </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="col-7">
-                <div class="card" style="width: 30rem;">
-                    <div class="card-header">
-                        Featured
+                <h2>Refeições</h2>
+                {% for meal in meals %}
+                    <div class="card border-dark my-3 text-start" style="width: 22rem;">
+                        <div class="card-header">
+                            {{ meal.name }}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Horário da refeição: {{ meal.time }}</p>
+                            <p class="card-text">Refeições de hoje:
+                                {% for food in meal.foods.all %}
+                                    <br>
+                                    {{ food }} {{ food.quantity }} {{ food.measure }}
+                                {% endfor %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </main>

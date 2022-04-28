@@ -1,6 +1,4 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Row, Column, Submit
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import User
 
@@ -18,22 +16,3 @@ class UserCreateForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-# class UserEditForm(UserChangeForm):
-#     class Meta:
-#         model = User
-#         fields = ('name',)
-#
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.form_method = 'post'
-#         self.helper.add_input(Submit('save_customer', 'Salvar'))
-#         self.helper.layout = Layout(
-#             Row(
-#                 Column('first_name'),
-#                 Column('last_name')
-#             ),
-#             'email',
-#             'username',
-#         )
