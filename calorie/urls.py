@@ -20,6 +20,7 @@ from calorie.apps.meal.views import HomeCalorieView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
     path('', HomeCalorieView.as_view(), name='home'),
     path('meal/', include('calorie.apps.meal.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

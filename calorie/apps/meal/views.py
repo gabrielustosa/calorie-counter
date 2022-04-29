@@ -25,7 +25,7 @@ class HomeCalorieView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meals'] = Meal.objects.filter(user=self.request.user)
+        context['meals'] = Meal.objects.filter(user=self.request.user).prefetch_related('foods')
         return context
 
 
@@ -118,7 +118,7 @@ class CreateFoodView(CreateView):
             instance.carbohydrates_total = carbohydrates * measure
             instance.meal = meal
 
-            user = User.objects.get(pk=self.request.user.id)
+            user = self.request.user
             user.current_calories = user.current_calories + instance.calories
             user.save()
         else:
