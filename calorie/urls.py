@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from calorie.apps.meal.views import HomeCalorieView
+from calorie.apps.user.views import register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('', HomeCalorieView.as_view(), name='home'),
     path('meal/', include('calorie.apps.meal.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', register, name='register')
 ]

@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load field_filter %}
 
 {% block title %}
     Contador de calorias
@@ -21,42 +20,12 @@
                         <h2>O que foi ingerido hoje:</h2>
                         <table class="table table-hover">
                             <tbody>
-                            <tr>
-                                <td>Açucar</td>
-                                <td class="text-end">{% get_field_meal request.user 'sugar' %} G </td>
-                            </tr>
-                            <tr>
-                                <td>Fibra</td>
-                                <td class="text-end">{% get_field_meal request.user 'fiber' %} G </td>
-                            </tr>
-                            <tr>
-                                <td>Sodio</td>
-                                <td class="text-end">{% get_field_meal request.user 'sodium' %} MG </td>
-                            </tr>
-                            <tr>
-                                <td>Potássio</td>
-                                <td class="text-end">{% get_field_meal request.user 'potassium' %} MG </td>
-                            </tr>
-                            <tr>
-                                <td>Gordura saturada</td>
-                                <td class="text-end">{% get_field_meal request.user 'fat_saturated' %} G </td>
-                            </tr>
-                            <tr>
-                                <td>Gorduras Totais</td>
-                                <td class="text-end">{% get_field_meal request.user 'fat_total' %} G </td>
-                            </tr>
-                            <tr>
-                                <td>Colesterol</td>
-                                <td class="text-end">{% get_field_meal request.user 'cholesterol' %} MG </td>
-                            </tr>
-                            <tr>
-                                <td>Proteinas</td>
-                                <td class="text-end">{% get_field_meal request.user 'protein' %} G </td>
-                            </tr>
-                            <tr>
-                                <td>Carboidratos</td>
-                                <td class="text-end">{% get_field_meal request.user 'carbohydrates_total' %} G </td>
-                            </tr>
+                            {% for k, v in foods.items %}
+                                <tr>
+                                    <td>{{ k }}</td>
+                                    <td class="text-end">{{ v }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
