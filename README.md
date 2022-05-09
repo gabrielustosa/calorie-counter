@@ -1,4 +1,4 @@
-# calorie-counter
+# Contador de calorias
 
 Um projeto em Django onde é possível contar calorias do dia.
 
