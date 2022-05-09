@@ -16,20 +16,18 @@
     </style>
 </head>
 <body>
-<div class="d-flex justify-content-center bg-primary">
+<header class="d-flex justify-content-center bg-primary">
     <div>
         <a href="{% url 'home' %}" class="text-decoration-none text-dark">
             <h3>CALORIAS</h3>
         </a>
     </div>
-</div>
+</header>
 {% bootstrap_messages %}
 
 {% block content %} {% endblock %}
 
 {% bootstrap_javascript %}
-<script src="https://cdn.rawgit.com/dropbox/zxcvbn/v1.0/zxcvbn.js"></script>
-<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/1.1.0/dist/progressbar.js"></script>
 {% block javascript %} {% endblock %}
 </body>
 </html>
