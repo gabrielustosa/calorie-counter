@@ -26,9 +26,7 @@ class HomeCalorieView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['meals'] = Meal.objects.filter(user=self.request.user)
 
-        context['foods'] = get_food_list(self.request.user, 'sugar', 'fiber', 'sodium', 'potassium', 'fat_saturated',
-                                         'fat_total', 'cholesterol', 'protein',
-                                         'carbohydrates_total')
+        context['foods'] = get_food_list(self.request.user)
         return context
 
 
@@ -139,21 +137,17 @@ def calculate(n1, n2):
         return 0
 
 
-def get_food_list(user, *fields):
-    field_list = ''
-    for f in fields:
-        field_list += f'"meal_food"."{f}" '
-        if f != fields[len(fields) - 1]:
-            field_list += ', '
+def get_food_list(user):
+    fields = ['sugar', 'fiber', 'sodium', 'potassium', 'fat_saturated',
+              'fat_total', 'cholesterol', 'protein',
+              'carbohydrates_total']
 
-    foods = Food.objects.raw(
-        f'SELECT "meal_food"."id" , {field_list} FROM "meal_food" INNER JOIN "meal_meal"  ON ("meal_food"."meal_id" = "meal_meal"."id") WHERE "meal_meal"."user_id" = "{user.id}"'
-    )
+    foods = Food.objects.filter(meal__user=user)
     result = {}
     for f in fields:
         name = Food._meta.get_field(f).verbose_name
         result[name] = 0
     for food in foods:
         for v, k in enumerate(result.keys()):
-            result[k] += float(getattr(food, fields[v]))
+            result[k] += round(float(getattr(food, fields[v])))
     return result
