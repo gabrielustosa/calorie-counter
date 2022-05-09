@@ -7,3 +7,5 @@ O sistema conta com um sistema de Login/Register, adicionar refeições e adicio
 Além disso, o projeto consome uma API que mostra todos os valores nutricionais do alimento.
 
 Site de API de calorias: https://calorieninjas.com/
+
+Link: https://lustosa-calorie.herokuapp.com/
